@@ -1,0 +1,62 @@
+<script>
+    $('head').append('<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" type="text/css" />');
+    
+    document.title = 'Wemos - Leaner Web Interface';
+
+    $.getScript( "http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js", function( data, textStatus, jqxhr ) {
+        console.log( data ); // Data returned
+        console.log( textStatus ); // Success
+        console.log( jqxhr.status ); // 200
+        console.log( "Load was performed." );
+    });
+
+    function toggleLight(id, element) {
+        //alert("Light: " + id + ": " + element.checked);
+        //element.checked = true;
+        $('#action').load("http://" + ip + "/action?light=" + id + "&value=" + (element.checked ? "on" : "off"));
+    }
+</script>
+
+<fieldset class="ui-grid-a">
+    <div class="ui-block-a" style="width: 200px;"><img height="200px" src="https://docs.wemos.cc/en/latest/_images/d1_mini_v3.1.0_1_16x16.jpg"></div>
+    <div class="ui-block-b">
+        <h1>Wemos - Great Interface</h1>
+        <p>A demo to show a great interface that can be anything. It will not use the memory of the ESP8266 of the Wemos, so it can do a lot of things still.
+           The limits are of the web server that hosts all the files.
+        </p>
+    </div>
+    <div class="ui-block-c">
+        <table>
+            <tr><td style="text-align: center;"><canvas id="canvas_tt5f162ecb3f185" width="125" height="125"></canvas></td></tr>
+            <tr><td style="text-align: center; font-weight: bold"><a href="//24timezones.com/Amsterdam/time" style="text-decoration: none" class="clock24" id="tz24-1595289291-c116-eyJzaXplIjoiMTI1IiwiYmdjb2xvciI6IkZGOTkwMCIsImxhbmciOiJlbiIsInR5cGUiOiJhIiwiY2FudmFzX2lkIjoiY2FudmFzX3R0NWYxNjJlY2IzZjE4NSJ9" title="World Clock :: Amsterdam" target="_blank" rel="nofollow"></a></td></tr>
+        </table>
+        <script type="text/javascript" src="//w.24timezones.com/l.js" async></script>
+    </div>
+</fieldset>
+
+<div data-role="header">
+    <h1>INTERFACE</h1>
+</div>
+
+<h1>CONTROL YOUR LIGHTS</h1>
+<div class="custom-control custom-switch">
+    <input type="checkbox" data-role="flipswitch" name="light-1" id="light-1-switch" onchange="toggleLight(1, this);">
+    <label for="light-1-switch">Flip toggle switch checkbox:</label>
+</div>
+<div class="custom-control custom-switch">
+    <input type="checkbox" data-role="flipswitch" name="light-2" id="light-2-switch" onchange="toggleLight(2, this);">
+    <label for="light-2-switch">Flip toggle switch checkbox:</label>
+</div>
+<div class="custom-control custom-switch">
+    <input type="checkbox" data-role="flipswitch" name="light-3" id="light-3-switch" onchange="toggleLight(3, this);">
+    <label for="light-3-switch">Flip toggle switch checkbox:</label>
+</div>
+<div class="custom-control custom-switch">
+    <input type="checkbox" data-role="flipswitch" name="light-4" id="light-4-switch" onchange="toggleLight(4, this);">
+    <label for="light-4-switch">Flip toggle switch checkbox:</label>
+</div>
+
+<br/>
+
+<h1>Reaction from Wemos:</h1>
+<div id="action">Action...</div>
